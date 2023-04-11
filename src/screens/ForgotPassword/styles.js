@@ -1,48 +1,42 @@
 import { StyleSheet, Dimensions } from "react-native";
+import colors from "../../config/colors";
+import { size
+ } from "../../config/Responsive";
 //import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default StyleSheet.create({
-    container: {},
     wrapper: {
         height: windowHeight,
         width: windowWidth,
-        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    logolayout: {
-        width: '100%',
-        height: 320,
-        backgroundColor: '#bce7df',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
+    image: {
+        position: 'relative',
     },
-    bgImage: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        justifyContent: 'center',
-        overflow: 'hidden'
+    orange: {
+        position: "absolute",
+        left: size(230),
+        top: size(50)
     },
-
     logo: {
-        flexDirection: 'row',
-        width: '100%',
-        height: 160,
-        // backgroundColor: '#03c6bc',
-        justifyContent: 'center',
-        //marginTop: '10%',
+        width: size(120),
+        height: size(120),
     },
     logoImage: {
-        width: 167,
-        height: '100%',
-        //backgroundColor: '#fec103'
+        width: size(120),
+        height: size(120),
     },
-    title: {
-        width: '100%',
-        height: 70,
+    form: {
+        width: size(300),
+        height: size(300),
+        padding: size(16),
+        justifyContent: "space-around",
+        borderRadius: 10,
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
         alignItems: 'center',
+        marginTop: size(50)
     },
     textboxlayout: {
         width: '80%',
@@ -53,62 +47,46 @@ export default StyleSheet.create({
         bottom: '12%',
         borderRadius: 50,
         elevation: 10,
-        //justifyContent: 'space-evenly'
     },
     titleFP: {
         color: 'black',
         fontSize: 20,
-        textAlign: 'center',
-        marginTop: 20, fontWeight: 'bold'
+        fontWeight: 'bold'
     },
     titleExplane: {
         color: 'gray',
         fontSize: 14,
-        marginHorizontal: 15,
-        marginTop: 10
+        textAlign: 'center'
     },
     userSpace: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#F0F0F0',
-        borderColor: '#000',
-        height: 50,
+        backgroundColor: colors.white,
+        height: size(50),
         width: '90%',
         borderRadius: 40,
-        marginTop: "10%",
         elevation: 1,
-        paddingLeft: 10,
-        marginHorizontal: '5%'
     },
     iconUserTextInput: {
-        padding: 10,
-        margin: 5,
-        height: 25,
-        width: 25,
-        resizeMode: 'stretch',
-        alignItems: 'center',
+        height: size(25),
+        width: size(25),
+        marginLeft: size(10),
+        marginRight: size(10)
     },
     userTextbox: {
-        flex: 1,
         fontSize: 15,
         color: 'black',
-        paddingRight: 30
+        width: '75%'
     },
     textError: {
         color: 'red',
         fontStyle: 'italic',
-        marginTop: "1%",
-        marginLeft: '10%',
-        // marginBottom: '-5%'
     },
 
     btnlogin: {
-        marginLeft: '25%',
-        marginTop: '10%',
         width: '50%',
-        height: 50,
-        backgroundColor: '#e4983e',
+        height: size(50),
         borderRadius: 40,
         alignItems: 'center',
         justifyContent: 'center',
@@ -119,10 +97,9 @@ export default StyleSheet.create({
         color: 'white'
     },
     regishere: {
-        flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'center',
-        marginTop: "1%",
-        marginBottom: '7%',
-        marginTop: 15
+        width: size(50),
+        height: size(30)
     }
 });

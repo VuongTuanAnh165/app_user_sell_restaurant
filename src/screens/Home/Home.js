@@ -15,15 +15,9 @@ import React, { useState, useEffect } from 'react';
 import SwiperSlide from './SwiperSlide';
 import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-
+import colors from '../../config/colors';
 
 export default function Home() {
-
-
   const [data, setData] = useState([]);
   const [dataCate, setDataCate] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -98,7 +92,7 @@ export default function Home() {
   // News and Updates
   const renderItem = ({ item, index }) => {
     return (
-      <View style={{ width: '90%', marginTop: 10, height: 140, backgroundColor: 'rgba(255,255,255,0.75)', marginBottom: 10, marginHorizontal: '5%', flexDirection: 'row', borderRadius: 12, alignItems: 'center' }}>
+      <View style={{ width: '95%', marginTop: 10, height: 140, backgroundColor: 'rgba(255,255,255,0.75)', marginBottom: 10, flexDirection: 'row', borderRadius: 12, alignItems: 'center' }}>
         <View style={{ width: '40%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
           <Image
             style={{ width: '80%', height: '80%', borderRadius: 10 }}
@@ -253,55 +247,45 @@ export default function Home() {
 
 
   return (
-    <SafeAreaView style={{}}>
-      <ImageBackground
-        source={require('../../assets/images/Home/mainBG.jpg')}
-        resizeMode='stretch'
-        style={{
-          height: windowHeight,
-          width: windowWidth,
-        }}
-      >
+    <SafeAreaView>
+      <View style={styles.wrapper}>
+        <View style={{ position: 'absolute', justifyContent: "space-around", top: 20 }}>
+          <Image style={styles.image} source={require('../../assets/images/bgshapes-yellow-1.png')} />
+          <Image style={styles.image} source={require('../../assets/images/bgshapes-yellow-2.png')} />
+        </View>
         {/* Header  */}
-        <View style={{ width: '100%', height: 80, backgroundColor: 'rgba(255,255,255,0.75)', flexDirection: 'row' }}>
-          <TouchableOpacity style={{ width: '15%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.navbar}>
             <Image
               source={require('../../assets/images/Home/menu.png')}
-              style={{ width: 25, height: 25 }}
+              style={styles.iconNavbar}
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: '85%',
-              height: '100%',
-              justifyContent: 'center'
-            }}
-          >
-            <Text
-              style={{
-                color: 'gray',
-                fontSize: 18,
-                paddingLeft: 5
-              }}
-            >
-              DELIVERY TO
+          <View style={styles.welcome}>
+            <Text style={styles.welcomeTitle} >
+              Chào mừng đến với
             </Text>
-            <View style={{ width: '85%', flexDirection: 'row' }}>
-              <Image
-                style={{ width: 23, height: 23 }}
-                source={require('../../assets/images/Home/location.png')}
-              />
-              <Text
-                style={{ color: 'black', fontSize: 19, fontWeight: '600' }}
-                numberOfLines={1}
-              >
-                20 Ho Tung Mau, Mai Dich, Cau Giay, Ha Noi.
-              </Text>
-            </View>
-          </TouchableOpacity>
+            <Text style={{ color: colors.title, fontSize: 19, fontWeight: '600' }}>
+              SkyLine
+            </Text>
+          </View>
         </View>
 
-        <ScrollView style={{}} showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.introduce}>
+            <View style={styles.content}>
+              <View style={styles.contentItem}>
+                <Image style={styles.imgContent} source={require('../../assets/images/icon/shops.png')} />
+                <Text>Nhà hàng</Text>
+                <Text>Chất lượng tốt nhất</Text>
+              </View>
+              <View style={styles.contentItem}>
+                <Image style={styles.imgContent} source={require('../../assets/images/icon/delivery-bike.png')} />
+                <Text>Vận chuyển</Text>
+                <Text>Luôn luôn đúng giờ</Text>
+              </View>
+            </View>
+          </View>
 
           {/* Danh mục category */}
           <View style={{ width: '100%', height: 140, justifyContent: 'center', marginTop: 5 }}>
@@ -330,14 +314,14 @@ export default function Home() {
           <View style={{ width: '100%', marginTop: 10 }}>
             <View style={{ width: '100%', height: 70, flexDirection: 'row' }}>
               <View style={{ width: '50%', height: '100%', paddingLeft: 20, justifyContent: 'center' }}>
-                <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black' }}>Popular</Text>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black' }}>Phổ biến</Text>
               </View>
               <TouchableOpacity style={{ width: '50%', height: '100%', justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }}>
                 <Text style={{
                   color: '#e4983e',
                   fontSize: 20
                 }}>
-                  View All
+                  Xem tất cả
                 </Text>
                 <Image style={{ width: 20, height: 20, marginLeft: 5, marginRight: 10 }}
                   source={require('../../assets/images/Home/chevorRight.png')} />
@@ -355,16 +339,9 @@ export default function Home() {
             />
           </View>
 
-
-
-
           {/* Trending*/}
-          <View style={{ width: '95%', marginLeft: '5%', marginTop: 30 }}>
-            <View style={{ width: '100%', height: 70, flexDirection: 'row' }}>
-              <View style={{ width: '50%', height: '100%', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black' }}>Trending Items</Text>
-              </View>
-            </View>
+          <View style={styles.productHot}>
+            <Text style={styles.title}>Món ăn đang hot</Text>
 
             <FlatList
               showsHorizontalScrollIndicator={false}
@@ -373,39 +350,29 @@ export default function Home() {
               keyExtractor={(item, index) => index.toString()}
               renderItem={_renderItemHorizontal}
             />
-
           </View>
-
-
-
-
-
 
           {/* Danh sách nhà hàng bạn có thể quan tâm */}
-          <View style={{ width: '100%', height: 70, marginTop: 30 }}>
-            <View style={{ width: '100%', height: '100%', paddingLeft: 20, justifyContent: 'center' }}>
-              <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black' }}>News and Updates </Text>
-            </View>
-          </View>
+          <View style={styles.productHot}>
+            <Text style={styles.title}>Bình luận</Text>
 
-          <FlatList
-            style={{}}
-            data={filterFood()}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-          // ListFooterComponent={renderFooter}
-          // onEndReached={handleLoadMore}
-          // onEndReachedThreshold={0}
-          />
+            <FlatList
+              data={filterFood()}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => index.toString()}
+            // ListFooterComponent={renderFooter}
+            // onEndReached={handleLoadMore}
+            // onEndReachedThreshold={0}
+            />
+          </View>
 
           <View style={{ width: '100%', height: 40 }}>
 
           </View>
-
         </ScrollView >
 
 
-      </ImageBackground>
+      </View>
     </SafeAreaView>
   );
 }

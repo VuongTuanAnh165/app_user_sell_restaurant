@@ -1,158 +1,160 @@
-import { View, Text, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, Image, ScrollView, StyleSheet, Dimensions } from 'react-native'
 import { TextInput } from 'react-native-paper'
-import styles from "./index"
-import { useFormik, Formik } from 'formik'
-import { object, string } from 'yup'
-import Loading from '../../components/Loading'
-import { userRequest } from '../../services/api'
-import { useRef } from 'react'
+import React, { useState } from 'react'
+import LinearGradient from 'react-native-linear-gradient'
+import { size } from '../../config/Responsive'
+import { useNavigation } from '@react-navigation/native'
+import { BlurView } from '@react-native-community/blur'
+import ButtonLogin from '../../components/Button'
+import colors from '../../config/colors'
 
-export default function Register({ navigation }) {
-    const [isError, setIsError] = useState(isError);
-    const [visible, setVisible] = useState(false);
-    const [name, setName] = useState('');
-    const [isViewPass, setIsViewPass] = useState(false);
-    const [viewPass, setViewPass] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [password_confirmation, setPassword_Confirmation] = useState('');
+const windowHeight = Dimensions.get('window').height
 
-    // const fomik = useFormik({
-    //     initialValues: {
-    //         name: "",
-    //         email: "",
-    //         password: "",
-    //         confirm_password: ""
-    //     }
-    // })
-
-    // vali = object({
-    //     name: string().required(),
-    //     email: string().email(),
-    //     password: string()
-    // })
-
-    // const onHandleSignUp = async () => {
-    //     try {
-    //         const body = {
-    //             name,
-    //             email,
-    //             password,
-    //             password_confirmation
-    //         }
-    //         const { data } = await userRequest.post('/user/register', body);
-    //         console.log(data);
-    //         const { id } = data.data.user
-    //         navigation.navigate('Verify', {
-    //             id: id
-    //         });
-    //     } catch (error) {
-    //         if (error.response) {
-    //             console.log("Error response: ", error.response.data);
-    //             setNameError(error.response.data.errors.name);
-    //             setGenderError(error.response.data.errors.gender);
-    //             setAddressError(error.response.data.errors.address);
-    //             setEmailError(error.response.data.errors.email);
-    //             setPasswordError(error.response.data.errors.password);
-    //             setPassword_ConfirmationError(error.response.data.errors.password_confirmation);
-    //         } else if (error.request) {
-    //             console.log("Error request: ", error.request);
-    //         } else {
-    //             console.log('Error', error.message);
-    //         }
-    //         console.log(error.config);
-    //     }
-    // };
-
-    const onChangeIsViewPass = () => setIsViewPass(!isViewPass);
-
-    const onChangeViewPass = () => setViewPass(!viewPass);
-
+export default function Signup() {
+    const [viewPass, setViewPass] = useState(false)
+    const [isViewPass, setIsViewPass] = useState(false)
+    const navigation = useNavigation()
+    const onChangeViewPass = () => setViewPass(!viewPass)
+    const onChangeIsViewPass = () => setIsViewPass(!isViewPass)
     return (
-        <ScrollView style={styles.wrapper}>
-            <ImageBackground style={styles.imgBg} source={require('../../assets/images/loginImage/background.jpg')}>
-                <View>
-                    <Image style={{ width: 150, height: 150 }} source={require('../../assets/images/logo.png')} />
+        <ScrollView>
+            <LinearGradient style={styles.wrapper} colors={["#cddc39", "#ff5722"]}>
+                <View style={{ position: 'absolute', justifyContent: "space-around" }}>
+                    <Image style={styles.image} source={require('../../assets/images/bgshapes-yellow-1.png')} />
+                    <Image style={styles.image} source={require('../../assets/images/bgshapes-yellow-2.png')} />
                 </View>
-                <View style={{ width: '100%', alignItems: 'center' }}>
-                    <View style={styles.title}>
-                        <Text style={styles.text}>Đăng ký</Text>
-                    </View>
-                    <View style={styles.inputForm}>
-                            <View style={styles.inputItem}>
-                                <TextInput
-                                    style={styles.textInput}
-                                    value={name}
-                                    label="Username"
-                                    onChangeText={(ev) => setName(ev)}
-                                    outlineColor="#fff"
-                                    activeOutlineColor='none'
-                                    mode='outlined'
-                                />
-                            </View>
-                            <View style={styles.inputItem}>
-                                <TextInput
-                                    style={styles.textInput}
-                                    value={email}
-                                    label="Email"
-                                    onChangeText={(ev) => setEmail(ev)}
-                                    outlineColor="#fff"
-                                    activeOutlineColor='none'
-                                    mode='outlined'
-                                />
-                            </View>
-                            <View style={styles.inputItem}>
-                                <TextInput
-                                    style={styles.textInput}
-                                    value={password}
-                                    label="Password"
-                                    onChangeText={(ev) => setPassword(ev)}
-                                    outlineColor="#fff"
-                                    activeOutlineColor='none'
-                                    secureTextEntry={viewPass ? false : true}
-                                    right={
-                                        <TextInput.Icon
-                                            icon={viewPass ? require('../../assets/images/icon/eye.png') : require('../../assets/images/icon/eye-off.png')}
-                                            onPress={onChangeViewPass}
-                                        />
-                                    }
-                                    mode='outlined'
-                                />
-                            </View>
-                            <View style={styles.inputItem}>
-                                <TextInput
-                                    style={styles.textInput}
-                                    value={password_confirmation}
-                                    label="Confirm Password"
-                                    onChangeText={(ev) => setPassword_Confirmation(ev)}
-                                    outlineColor="#fff"
-                                    activeOutlineColor='none'
-                                    mode='outlined'
-                                    secureTextEntry={isViewPass ? false : true}
-                                    right={
-                                        <TextInput.Icon
-                                            icon={isViewPass ? require('../../assets/images/icon/eye.png') : require('../../assets/images/icon/eye-off.png')}
-                                            onPress={onChangeIsViewPass}
-                                        />
-                                    }
-                                />
+                <Image style={styles.orange} source={require('../../assets/images/orange-slice.png')} />
+                <Image style={styles.logo} source={require('../../assets/images/logo.png')} />
+                <Text style={styles.title}>Đăng ký</Text>
+                <View style={styles.content}>
+                    <View style={styles.form} >
+                        <View style={styles.inputItem}>
+                            <TextInput
+                                style={{ fontSize: 18 }}
+                                mode='outlined'
+                                label="Họ và tên"
+                                placeholder="Nhập họ và tên"
+                                placeholderTextColor='#cccc'
+                                activeOutlineColor='none'
+                                outlineColor={colors.white}
+                            />
                         </View>
-                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Verify")}>
-                            <Text style={{ fontFamily: "Nunito", fontSize: 16, fontWeight: 'bold', color: '#fff' }}>REGISTER</Text>
-                        </TouchableOpacity>
+                        <View style={styles.inputItem}>
+                            <TextInput
+                                style={{ fontSize: 18 }}
+                                mode='outlined'
+                                label="Email"
+                                placeholder="Nhập email"
+                                placeholderTextColor='#cccc'
+                                activeOutlineColor='none'
+                                outlineColor={colors.white}
+                            />
+                        </View>
+                        <View style={styles.inputItem}>
+                            <TextInput
+                                style={{ fontSize: 18 }}
+                                mode='outlined'
+                                label="Mật khẩu"
+                                placeholder="Nhập mật khẩu"
+                                placeholderTextColor='#cccc'
+                                activeOutlineColor='none'
+                                outlineColor={colors.white}
+                                secureTextEntry={isViewPass ? false : true}
+                                right={
+                                    <TextInput.Icon
+                                        icon={isViewPass ? require('../../assets/images/eye-off.png') : require('../../assets/images/eye.png')}
+                                        onPress={onChangeIsViewPass}
+                                    />
+                                }
+                            />
+                        </View>
+                        <View style={styles.inputItem}>
+                            <TextInput
+                                style={{ fontSize: 18 }}
+                                mode='outlined'
+                                label="Nhập lại mật khẩu"
+                                placeholder="Nhập lại mật khẩu"
+                                placeholderTextColor='#cccc'
+                                activeOutlineColor='none'
+                                outlineColor={colors.white}
+                                secureTextEntry={viewPass ? false : true}
+                                right={
+                                    <TextInput.Icon
+                                        icon={viewPass ? require('../../assets/images/eye-off.png') : require('../../assets/images/eye.png')}
+                                        onPress={onChangeViewPass}
+                                    />
+                                }
+                            />
+                        </View>
+                        <ButtonLogin text="Đăng ký" />
                     </View>
                 </View>
-                <View style={styles.nvgLogin}>
-                    <Text style={[styles.text, { fontSize: 16, marginRight: 10 }]}>
-                        Bạn đã có tài khoản?
-                    </Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={{ color: colors.white, fontSize: 18, fontWeight: "600" }}>Bạn đã có tài khoản? </Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                        <Text style={[styles.text, { fontSize: 20, marginRight: 10 }]}>Đăng nhập</Text>
+                        <Text style={{ color: colors.white, fontSize: 20, fontWeight: "600" }}> Đăng nhập</Text>
                     </TouchableOpacity>
-                    <Image style={styles.imgIcon} source={require('../../assets/images/icon/right-arrow.png')} />
                 </View>
-            </ImageBackground>
+            </LinearGradient>
         </ScrollView>
-    );
+    )
 }
+
+const styles = StyleSheet.create({
+    wrapper: {
+        // flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        height: windowHeight
+    },
+    orange: {
+        position: "absolute",
+        left: size(250),
+        top: size(100)
+    },
+    logo: {
+        width: size(100),
+        height: size(100)
+    },
+    title: { 
+        fontSize: 25, 
+        fontWeight: "600", 
+        color: colors.white, 
+    },
+    content: {
+        alignItems: "center"
+    },
+    form: {
+        width: size(300),
+        height: size(450),
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        padding: 16,
+        justifyContent: "space-around",
+        borderRadius: 10,
+    },
+    inputItem: {
+        height: size(70),
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        justifyContent: "center"
+    },
+    image: {
+        position: 'relative',
+    },
+    otherLogin: {
+        width: size(300),
+        height: size(100),
+        alignItems: 'center',
+        justifyContent: "space-evenly"
+    },
+    boxIcon: {
+        flexDirection: 'row',
+        width: size(200),
+        justifyContent: "space-evenly"
+    },
+    icon: {
+        width: size(25),
+        height: size(25),
+        tintColor: "#fff"
+    }
+})

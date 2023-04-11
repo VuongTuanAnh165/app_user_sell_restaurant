@@ -10,9 +10,7 @@ import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import Preloading from './src/components/Preloading';
 import HomeStackNavigator from './src/navigator/Navigator';
-import BottomTabNavigator from './src/navigator/TabNavigator';
 import { NavigationContainer } from '@react-navigation/native';
-import Tabs from './src/navigator/Navigator';
 
 const App = () => {
 
