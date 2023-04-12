@@ -1,20 +1,15 @@
 import { StyleSheet, Dimensions } from "react-native";
+import colors from "../../../config/colors";
+import { size } from "../../../config/Responsive";
 //import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default StyleSheet.create({
-    container: {},
     wrapper: {
         height: windowHeight,
         width: windowWidth,
-        backgroundColor: '#fff',
-    },
-    logolayout: {
-        width: '100%',
-        height: 320,
-        backgroundColor: '#bce7df',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
+        alignItems: 'center',
+        // justifyContent: 'space-evenly'
     },
     bgImage: {
         flex: 1,
@@ -25,19 +20,18 @@ export default StyleSheet.create({
         justifyContent: 'center',
         overflow: 'hidden'
     },
-
-    logo: {
-        flexDirection: 'row',
-        width: '100%',
-        height: 160,
-        // backgroundColor: '#03c6bc',
-        justifyContent: 'center',
-        //marginTop: '10%',
+    orange: {
+        position: "absolute",
+        left: size(230),
+        top: size(50)
+    },
+    image: {
+        position: 'relative',
     },
     logoImage: {
-        width: 167,
-        height: '100%',
-        //backgroundColor: '#fec103'
+        width: size(120),
+        height: size(120),
+        marginTop: size(100)
     },
     title: {
         width: '100%',
@@ -46,47 +40,30 @@ export default StyleSheet.create({
     },
     textboxlayout: {
         width: '80%',
-        minheight: 200,
-        marginHorizontal: '10%',
-        backgroundColor: 'white',
-        position: 'relative',
-        bottom: '12%',
+        height: size(300),
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
         borderRadius: 50,
         elevation: 10,
-        //justifyContent: 'space-evenly'
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        marginTop: size(50)
     },
     titleFP: {
-        color: 'black',
-        fontSize: 19.5,
+        color: colors.black,
+        fontSize: 19,
         textAlign: 'center',
-        marginTop: 20, fontWeight: 'bold'
+        fontWeight: 'bold'
     },
     titleExplane: {
-        color: 'gray',
+        // color: 'gray',
         fontSize: 13,
-        marginHorizontal: 20,
-        marginTop: 10
-    },
-    userSpace: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F0F0F0',
-        borderColor: '#000',
-        height: 50,
-        width: '90%',
-        borderRadius: 40,
-        marginTop: "10%",
-        elevation: 1,
-        paddingLeft: 10,
-        marginHorizontal: '5%'
+        textAlign: 'center'
     },
     iconUserTextInput: {
         padding: 10,
         margin: 5,
         height: 25,
         width: 25,
-        resizeMode: 'stretch',
         alignItems: 'center',
     },
     userTextbox: {
@@ -106,24 +83,17 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F0F0F0',
-        borderColor: '#000',
+        backgroundColor: colors.white,
         height: 50,
         width: '90%',
         borderRadius: 40,
         elevation: 1,
-        paddingLeft: 10,
-        marginHorizontal: '5%',
-        marginTop: "5%",
-        // marginTop: '-5%'
     },
     iconUserTextInput: {
         padding: 10,
         margin: 5,
-        height: 25,
-        width: 25,
-        resizeMode: 'stretch',
-        alignItems: 'center',
+        height: size(20),
+        width: size(20),
     },
     passTextbox: {
         flex: 1,
@@ -139,15 +109,9 @@ export default StyleSheet.create({
     },
 
     btnlogin: {
-        marginLeft: '25%',
-        marginTop: '10%',
         width: '50%',
-        height: 50,
-        backgroundColor: '#e4983e',
-        borderRadius: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '7%',
+        height: size(50),
+        borderRadius: 50
     },
     btnloginContent: {
         fontSize: 20,

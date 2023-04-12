@@ -8,11 +8,13 @@ import Profile from '../screens/Account/Profile/Profile';
 import ChangePassword from '../screens/Account/ChangePassword/ChangePassword';
 import Restaurant from '../screens/Restaurant/Restaurants/Restaurant';
 import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
-import VerifyOTP from '../screens/ForgotPassword/VerifyOTP';
-import PassReset from '../screens/ForgotPassword/PassReset';
+import VerifyOTP from '../screens/ForgotPassword/Verify/VerifyOTP';
+import PassReset from '../screens/ForgotPassword/PassReset/PassReset';
 import Notification from '../screens/Notification/Notification';
 import OrderCancel from '../screens/OrderCancel/OrderCancel';
+// import Login from '../screens/Apprestaurant/Login/Login'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import Home from '../screens/Home/Home';
 
 const Stack = createNativeStackNavigator();
@@ -21,7 +23,7 @@ const screenOptionStyles = {
 };
 const HomeStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={screenOptionStyles} initialRouteName="Register">
+    <Stack.Navigator screenOptions={screenOptionStyles} initialRouteName="Login">
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="Login" component={Login} />

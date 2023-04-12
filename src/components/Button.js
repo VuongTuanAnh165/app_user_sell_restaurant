@@ -1,49 +1,27 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { size } from '../config/Responsive';
+import colors from '../config/colors';
 
-const windowWidth = Dimensions.get('window').width
-const windowHeight = Dimensions.get('window').height
-
-export default function ButtonDefault(props) {
-    const { onPress, text } = props
+export default function ButtonLogin(props) {
     return (
-        <View style={styles.btnDefault}>
-            <LinearGradient style={styles.bgButton} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#D8AB37', '#F18345']}>
-                <TouchableOpacity style={styles.button} onPress={onPress}>
-                    <Text style={styles.buttonText}>{text}</Text>
-                </TouchableOpacity>
-            </LinearGradient>
-        </View>
+            <TouchableOpacity style={[styles.button, props.style]} onPress={props.onPress}>
+                <Text style={styles.buttonText}>{props.text}</Text>
+            </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
-    btnDefault:{
-        width: windowWidth,
-        height: windowHeight/18,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    bgButton: {
-        width: '25%',
-        height: "100%",
-        borderRadius: 30,
-        marginTop: 20,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
     button: {
-        width: '100%',
-        height: '100%',
-        borderRadius: 30,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
+        height: size(60),
+        backgroundColor: colors.bgButton,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 10,
     },
     buttonText: {
-        fontSize: 16
+        fontSize: 20, 
+        color: colors.white
     }
 });
 
